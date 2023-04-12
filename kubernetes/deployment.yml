@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment-v1
+spec:
+  replicas: 1
+  template:  
+    metadata:
+      name: backend
+      labels:
+        app: node-backend
+        version: blue
+    spec:
+      containers:
+        - name: node-container-backend
+          image: mts988/kube-news:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "10m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          envFrom:
+          - configMapRef:
+              name: backend-configmap
+  selector:
+    matchLabels:
+      app: node-backend
