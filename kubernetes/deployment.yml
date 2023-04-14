@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: node-container-backend
-          image: mts988/kube-news:latest
+          image: mts988/kube-news:{{TAG}}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
